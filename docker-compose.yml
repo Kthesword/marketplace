@@ -1,0 +1,24 @@
+# Local development database. Start with:  docker compose up -d
+services:
+  postgres:
+    image: postgres:16-alpine          # pinned major version: upgrades are a deliberate choice
+    container_name: marketplace-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-marketplace}         # ${VAR:-default} = use .env value or fall back
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-marketplace}
+      POSTGRES_DB: ${POSTGRES_DB:-marketplace}
+    ports:
+      # host:container. Host port 5433 avoids clashing with a native Postgres on 5432.
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # named volume: data survives container restarts/removal
+    healthcheck:                         # lets `docker compose ps` report "healthy" once Postgres accepts connections
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-marketplace} -d ${POSTGRES_DB:-marketplace}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:
+
