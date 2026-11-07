@@ -108,15 +108,15 @@ export default function OrdersPage() {
                     <div>
                       <Link
                         href={`/orders/${o.id}`}
-                        className="font-semibold text-gray-900 hover:text-indigo-600"
+                        className="font-bold text-gray-900 hover:text-indigo-700"
                       >
                         Order #{o.id}
                       </Link>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs font-medium text-gray-700">
                         {new Date(o.created_at).toLocaleString()} · from{" "}
                         <Link
                           href={`/sellers/${o.seller_id}`}
-                          className="text-indigo-600 hover:underline"
+                          className="font-semibold text-indigo-700 hover:underline"
                         >
                           {o.store_name || `Seller #${o.seller_id}`}
                         </Link>
@@ -136,12 +136,12 @@ export default function OrdersPage() {
                           {cancellingId === o.id ? "Cancelling..." : "Cancel"}
                         </button>
                       )}
-                      <span className="font-bold text-gray-900">
+                      <span className="font-extrabold text-gray-900">
                         {formatCents(o.total_cents)}
                       </span>
                     </div>
                   </div>
-                  <p className="mt-3 line-clamp-1 text-sm text-gray-600">
+                  <p className="mt-3 line-clamp-1 text-sm font-medium text-gray-800">
                     {o.items
                       .map((i) => `${i.product_name} × ${i.quantity}`)
                       .join(", ")}

@@ -87,11 +87,11 @@ export default function SellerProfilePage() {
                     <h1 className="text-2xl font-bold text-gray-900">
                       {profile.store.name}
                     </h1>
-                    <p className="text-sm text-gray-500">
-                      Managed by {profile.seller_name} · Contact:{" "}
+                    <p className="text-sm font-medium text-gray-700">
+                      Managed by <span className="font-semibold text-gray-900">{profile.seller_name}</span> · Contact:{" "}
                       <a
                         href={`mailto:${profile.store.contact_email}`}
-                        className="text-indigo-600 hover:underline"
+                        className="font-semibold text-indigo-700 hover:underline"
                       >
                         {profile.store.contact_email}
                       </a>

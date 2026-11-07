@@ -122,39 +122,39 @@ export default function ProductDetailPage() {
                 </p>
 
                 <div className="mt-4 border-t border-gray-100 pt-4">
-                  <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  <h2 className="text-xs font-bold uppercase tracking-wider text-gray-700">
                     Description
                   </h2>
-                  <p className="mt-2 whitespace-pre-line text-sm text-gray-700">
+                  <p className="mt-2 whitespace-pre-line text-sm font-normal text-gray-800">
                     {product.description || "No description provided."}
                   </p>
                 </div>
               </div>
 
               <div className="mt-8 border-t border-gray-100 pt-6">
-                <p className="text-sm font-medium text-gray-700">
+                <p className="text-sm font-semibold text-gray-800">
                   Availability:{" "}
                   {product.stock > 0 ? (
-                    <span className="text-emerald-600">
+                    <span className="font-bold text-emerald-700">
                       {product.stock} in stock
                     </span>
                   ) : (
-                    <span className="text-red-600">Out of stock</span>
+                    <span className="font-bold text-red-600">Out of stock</span>
                   )}
                 </p>
 
                 {feedback && (
                   <div
                     role="alert"
-                    className={`mt-4 rounded-md border px-4 py-3 text-sm ${
+                    className={`mt-4 rounded-md border px-4 py-3 text-sm font-medium ${
                       feedback.type === "success"
-                        ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-                        : "border-red-200 bg-red-50 text-red-700"
+                        ? "border-emerald-300 bg-emerald-50 text-emerald-900"
+                        : "border-red-300 bg-red-50 text-red-800"
                     }`}
                   >
                     {feedback.text}{" "}
                     {feedback.type === "success" && (
-                      <Link href="/cart" className="font-semibold underline">
+                      <Link href="/cart" className="font-bold underline">
                         View Cart
                       </Link>
                     )}
@@ -162,7 +162,7 @@ export default function ProductDetailPage() {
                 )}
 
                 {user?.role === "seller" ? (
-                  <p className="mt-4 text-xs text-gray-500">
+                  <p className="mt-4 text-xs font-medium text-gray-700">
                     You are signed in as a seller. Sign in with a buyer account to purchase items.
                   </p>
                 ) : (

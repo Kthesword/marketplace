@@ -123,7 +123,7 @@ export default function CartPage() {
                             className="h-full w-full object-cover"
                           />
                         ) : (
-                          <div className="flex h-full w-full items-center justify-center text-xs text-gray-400">
+                          <div className="flex h-full w-full items-center justify-center text-xs font-semibold text-gray-600">
                             No img
                           </div>
                         )}
@@ -131,17 +131,17 @@ export default function CartPage() {
                       <div>
                         <Link
                           href={`/sellers/${item.seller_id}`}
-                          className="text-xs font-medium text-indigo-600 hover:underline"
+                          className="text-xs font-semibold text-indigo-700 hover:text-indigo-900 hover:underline"
                         >
                           {item.store_name}
                         </Link>
                         <Link
                           href={`/products/${item.product_id}`}
-                          className="block font-semibold text-gray-900 hover:text-indigo-600"
+                          className="block font-bold text-gray-900 hover:text-indigo-700"
                         >
                           {item.name}
                         </Link>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs font-medium text-gray-700">
                           {formatCents(item.price_cents)} each · {item.stock} in
                           stock
                         </p>

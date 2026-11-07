@@ -93,9 +93,9 @@ export default function SellerDashboardPage() {
                   <h2 className="mt-1 text-xl font-bold text-gray-900">
                     {store.name}
                   </h2>
-                  <p className="mt-0.5 text-sm text-gray-600">
+                  <p className="mt-0.5 text-sm font-medium text-gray-700">
                     {store.description || "No description set"} ·{" "}
-                    <span className="text-gray-500">{store.contact_email}</span>
+                    <span className="font-semibold text-gray-900">{store.contact_email}</span>
                   </p>
                 </div>
                 <div className="flex gap-3">
@@ -117,26 +117,26 @@ export default function SellerDashboardPage() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
               <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <p className="text-xs font-bold uppercase tracking-wider text-gray-700">
                   Total Products
                 </p>
-                <p className="mt-2 text-3xl font-bold text-gray-900">
+                <p className="mt-2 text-3xl font-extrabold text-gray-900">
                   {products.length}
                 </p>
               </div>
               <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <p className="text-xs font-bold uppercase tracking-wider text-gray-700">
                   Active Listings
                 </p>
-                <p className="mt-2 text-3xl font-bold text-emerald-600">
+                <p className="mt-2 text-3xl font-extrabold text-emerald-700">
                   {activeCount}
                 </p>
               </div>
               <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <p className="text-xs font-bold uppercase tracking-wider text-gray-700">
                   Out of Stock
                 </p>
-                <p className="mt-2 text-3xl font-bold text-amber-600">
+                <p className="mt-2 text-3xl font-extrabold text-amber-700">
                   {outOfStockCount}
                 </p>
               </div>

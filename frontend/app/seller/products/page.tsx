@@ -358,7 +358,7 @@ export default function SellerProductsPage() {
         ) : (
           <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
             <table className="min-w-full divide-y divide-gray-200 text-sm">
-              <thead className="bg-gray-50 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+              <thead className="bg-gray-100 text-left text-xs font-bold uppercase tracking-wider text-gray-700">
                 <tr>
                   <th className="px-6 py-3">Product</th>
                   <th className="px-6 py-3">Price</th>
@@ -371,9 +371,9 @@ export default function SellerProductsPage() {
                 {products.map((p) => (
                   <tr key={p.id}>
                     <td className="px-6 py-4">
-                      <div className="font-semibold text-gray-900">{p.name}</div>
+                      <div className="font-bold text-gray-900">{p.name}</div>
                       {p.description && (
-                        <div className="line-clamp-1 text-xs text-gray-500">
+                        <div className="line-clamp-1 text-xs font-medium text-gray-700">
                           {p.description}
                         </div>
                       )}

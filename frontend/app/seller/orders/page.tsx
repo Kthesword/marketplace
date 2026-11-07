@@ -150,9 +150,9 @@ export default function SellerOrdersPage() {
                         <h2 className="text-lg font-bold text-gray-900">
                           Order #{o.id}
                         </h2>
-                        <p className="mt-0.5 text-xs text-gray-500">
+                        <p className="mt-0.5 text-xs font-medium text-gray-700">
                           Buyer:{" "}
-                          <span className="font-medium text-gray-700">
+                          <span className="font-bold text-gray-900">
                             {o.buyer_name || `Buyer #${o.buyer_id}`}
                           </span>{" "}
                           · Placed {new Date(o.created_at).toLocaleString()}
@@ -187,7 +187,7 @@ export default function SellerOrdersPage() {
                     </div>
 
                     <table className="mt-4 min-w-full divide-y divide-gray-200 text-sm">
-                      <thead className="text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                      <thead className="text-left text-xs font-bold uppercase tracking-wider text-gray-700">
                         <tr>
                           <th className="py-2">Product (Snapshot)</th>
                           <th className="py-2">Unit Price</th>
@@ -198,21 +198,21 @@ export default function SellerOrdersPage() {
                       <tbody className="divide-y divide-gray-100">
                         {o.items.map((it) => (
                           <tr key={it.id}>
-                            <td className="py-2.5 font-medium text-gray-900">
+                            <td className="py-2.5 font-bold text-gray-900">
                               {it.product_name}
                               {!it.product_id && (
-                                <span className="ml-2 text-xs font-normal text-gray-400">
+                                <span className="ml-2 text-xs font-semibold text-gray-600">
                                   (deleted product)
                                 </span>
                               )}
                             </td>
-                            <td className="py-2.5 text-gray-700">
+                            <td className="py-2.5 font-medium text-gray-800">
                               {formatCents(it.unit_price_cents)}
                             </td>
-                            <td className="py-2.5 text-gray-700">
+                            <td className="py-2.5 font-medium text-gray-800">
                               {it.quantity}
                             </td>
-                            <td className="py-2.5 text-right font-medium text-gray-900">
+                            <td className="py-2.5 text-right font-bold text-gray-900">
                               {formatCents(it.line_total_cents)}
                             </td>
                           </tr>

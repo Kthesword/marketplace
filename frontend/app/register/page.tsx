@@ -91,8 +91,8 @@ export default function RegisterPage() {
                   {...register("role")}
                   className="sr-only"
                 />
-                <span className="font-semibold">Buyer</span>
-                <span className="mt-0.5 text-xs text-gray-500">
+                <span className="font-semibold text-gray-900">Buyer</span>
+                <span className="mt-0.5 text-xs font-medium text-gray-700">
                   Browse &amp; purchase items
                 </span>
               </label>
@@ -110,8 +110,8 @@ export default function RegisterPage() {
                   {...register("role")}
                   className="sr-only"
                 />
-                <span className="font-semibold">Seller</span>
-                <span className="mt-0.5 text-xs text-gray-500">
+                <span className="font-semibold text-gray-900">Seller</span>
+                <span className="mt-0.5 text-xs font-medium text-gray-700">
                   Open a store &amp; sell
                 </span>
               </label>
@@ -124,7 +124,7 @@ export default function RegisterPage() {
           <div>
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-semibold text-gray-900"
             >
               Full Name
             </label>
@@ -133,7 +133,7 @@ export default function RegisterPage() {
               type="text"
               autoComplete="name"
               {...register("name")}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none"
+              className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-indigo-500 focus:outline-none"
               placeholder="Alice Smith"
             />
             {errors.name && (
@@ -144,7 +144,7 @@ export default function RegisterPage() {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-semibold text-gray-900"
             >
               Email
             </label>
@@ -153,7 +153,7 @@ export default function RegisterPage() {
               type="email"
               autoComplete="email"
               {...register("email")}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none"
+              className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-indigo-500 focus:outline-none"
               placeholder="you@example.com"
             />
             {errors.email && (
@@ -164,7 +164,7 @@ export default function RegisterPage() {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-semibold text-gray-900"
             >
               Password (min 8 characters)
             </label>
@@ -173,7 +173,7 @@ export default function RegisterPage() {
               type="password"
               autoComplete="new-password"
               {...register("password")}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none"
+              className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-indigo-500 focus:outline-none"
               placeholder="••••••••"
             />
             {errors.password && (

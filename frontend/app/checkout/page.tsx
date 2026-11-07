@@ -120,7 +120,7 @@ export default function CheckoutPage() {
                     >
                       {g.store}
                     </Link>
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm font-semibold text-gray-700">
                       Subtotal {formatCents(subtotal)}
                     </span>
                   </header>
@@ -130,9 +130,9 @@ export default function CheckoutPage() {
                         key={i.product_id}
                         className="flex items-center justify-between px-5 py-3 text-sm"
                       >
-                        <span className="text-gray-800">
+                        <span className="font-medium text-gray-900">
                           {i.name}{" "}
-                          <span className="text-gray-500">
+                          <span className="font-normal text-gray-700">
                             × {i.quantity} @ {formatCents(i.price_cents)}
                           </span>
                         </span>

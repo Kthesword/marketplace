@@ -19,12 +19,12 @@ export function ProductCard({ product }: { product: Product }) {
             className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center text-xs font-medium text-gray-400">
+          <div className="flex h-full w-full items-center justify-center text-xs font-semibold text-gray-500">
             No image
           </div>
         )}
         {outOfStock && (
-          <span className="absolute right-2 top-2 rounded-full bg-red-600 px-2.5 py-0.5 text-xs font-semibold text-white">
+          <span className="absolute right-2 top-2 rounded-full bg-red-600 px-2.5 py-0.5 text-xs font-bold text-white shadow">
             Out of stock
           </span>
         )}
@@ -34,27 +34,27 @@ export function ProductCard({ product }: { product: Product }) {
         <div>
           <Link
             href={`/sellers/${product.seller_id}`}
-            className="text-xs font-medium text-indigo-600 hover:underline"
+            className="text-xs font-semibold text-indigo-700 hover:text-indigo-900 hover:underline"
           >
             {product.store_name || `Seller #${product.seller_id}`}
           </Link>
           <Link href={`/products/${product.id}`} className="mt-1 block">
-            <h3 className="line-clamp-1 font-semibold text-gray-900 group-hover:text-indigo-600">
+            <h3 className="line-clamp-1 font-bold text-gray-900 group-hover:text-indigo-700">
               {product.name}
             </h3>
           </Link>
           {product.description && (
-            <p className="mt-1 line-clamp-2 text-xs text-gray-500">
+            <p className="mt-1.5 line-clamp-2 text-xs font-medium text-gray-700">
               {product.description}
             </p>
           )}
         </div>
 
-        <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-3">
-          <span className="text-base font-bold text-gray-900">
+        <div className="mt-4 flex items-center justify-between border-t border-gray-200 pt-3">
+          <span className="text-base font-extrabold text-gray-900">
             {formatCents(product.price_cents)}
           </span>
-          <span className="text-xs text-gray-500">
+          <span className="text-xs font-semibold text-gray-700">
             {outOfStock ? "0 left" : `${product.stock} in stock`}
           </span>
         </div>
@@ -62,4 +62,3 @@ export function ProductCard({ product }: { product: Product }) {
     </div>
   );
 }
-

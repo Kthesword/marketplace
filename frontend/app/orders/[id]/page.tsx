@@ -78,11 +78,11 @@ export default function OrderDetailPage() {
                 <h1 className="text-xl font-bold text-gray-900">
                   Order #{order.id}
                 </h1>
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-sm font-medium text-gray-700">
                   Placed {new Date(order.created_at).toLocaleString()} · sold by{" "}
                   <Link
                     href={`/sellers/${order.seller_id}`}
-                    className="text-indigo-600 hover:underline"
+                    className="font-semibold text-indigo-700 hover:underline"
                   >
                     {order.store_name || `Seller #${order.seller_id}`}
                   </Link>
@@ -113,7 +113,7 @@ export default function OrderDetailPage() {
             )}
 
             <table className="mt-6 min-w-full divide-y divide-gray-200 text-sm">
-              <thead className="text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+              <thead className="text-left text-xs font-bold uppercase tracking-wider text-gray-700">
                 <tr>
                   <th className="py-2">Item</th>
                   <th className="py-2">Price</th>
@@ -133,19 +133,19 @@ export default function OrderDetailPage() {
                           {i.product_name}
                         </Link>
                       ) : (
-                        <span title="This product was removed by the seller">
+                        <span title="This product was removed by the seller" className="text-gray-900 font-medium">
                           {i.product_name}{" "}
-                          <span className="text-xs font-normal text-gray-400">
+                          <span className="text-xs font-semibold text-gray-600">
                             (listing removed)
                           </span>
                         </span>
                       )}
                     </td>
-                    <td className="py-3 text-gray-700">
+                    <td className="py-3 font-medium text-gray-800">
                       {formatCents(i.unit_price_cents)}
                     </td>
-                    <td className="py-3 text-gray-700">{i.quantity}</td>
-                    <td className="py-3 text-right font-medium text-gray-900">
+                    <td className="py-3 font-medium text-gray-800">{i.quantity}</td>
+                    <td className="py-3 text-right font-bold text-gray-900">
                       {formatCents(i.line_total_cents)}
                     </td>
                   </tr>
@@ -153,10 +153,10 @@ export default function OrderDetailPage() {
               </tbody>
             </table>
 
-            <p className="mt-4 border-t border-gray-100 pt-4 text-right text-lg font-bold text-gray-900">
+            <p className="mt-4 border-t border-gray-200 pt-4 text-right text-lg font-extrabold text-gray-900">
               Total: {formatCents(order.total_cents)}
             </p>
-            <p className="mt-2 text-xs text-gray-400">
+            <p className="mt-2 text-xs font-medium text-gray-700">
               Item names and prices are the ones you paid at purchase time.
             </p>
           </div>
