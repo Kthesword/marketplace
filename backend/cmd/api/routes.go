@@ -76,6 +76,11 @@ func newRouter(cfg config.Config, pool *pgxpool.Pool) http.Handler {
 	mux.HandleFunc("POST /api/orders/checkout", middleware.RequireRole(tokenMgr, user.RoleBuyer, orderHandler.Checkout))
 	mux.HandleFunc("GET /api/orders", middleware.RequireRole(tokenMgr, user.RoleBuyer, orderHandler.List))
 	mux.HandleFunc("GET /api/orders/{id}", middleware.RequireRole(tokenMgr, user.RoleBuyer, orderHandler.Get))
+	mux.HandleFunc("POST /api/orders/{id}/cancel", middleware.RequireRole(tokenMgr, user.RoleBuyer, orderHandler.Cancel))
+
+	// Seller orders (seller role required)
+	mux.HandleFunc("GET /api/seller/orders", middleware.RequireRole(tokenMgr, user.RoleSeller, orderHandler.ListSeller))
+	mux.HandleFunc("PATCH /api/seller/orders/{id}/status", middleware.RequireRole(tokenMgr, user.RoleSeller, orderHandler.UpdateStatusSeller))
 
 	// Catch-all: any unmatched path gets our JSON error format, not Go's plain text.
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
