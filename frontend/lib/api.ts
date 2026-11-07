@@ -1,7 +1,9 @@
 import type {
   ApiErrorPayload,
   Cart,
+  CheckoutResult,
   LoginInput,
+  Order,
   Paginated,
   Product,
   ProductInput,
@@ -184,6 +186,25 @@ export const api = {
       return request<Cart>(`/bff/api/cart/items/${productId}`, {
         method: "DELETE",
       });
+    },
+  },
+
+  orders: {
+    // No arguments on purpose: the server reads the cart from the database,
+    // so the browser can never tamper with prices or quantities.
+    checkout(): Promise<CheckoutResult> {
+      return request<CheckoutResult>("/bff/api/orders/checkout", {
+        method: "POST",
+        body: "{}",
+      });
+    },
+    list(page = 1, pageSize = 10): Promise<Paginated<Order>> {
+      return request<Paginated<Order>>(
+        `/bff/api/orders?page=${page}&page_size=${pageSize}`
+      );
+    },
+    get(id: number): Promise<{ order: Order }> {
+      return request<{ order: Order }>(`/bff/api/orders/${id}`);
     },
   },
 };

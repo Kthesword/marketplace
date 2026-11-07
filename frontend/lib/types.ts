@@ -101,3 +101,32 @@ export interface Cart {
   items: CartItem[];
   total_cents: number;
 }
+
+export type OrderStatus = "Pending" | "Shipped" | "Delivered" | "Cancelled";
+
+export interface OrderItem {
+  id: number;
+  product_id: number | null; // null if the product was deleted after purchase
+  product_name: string; // snapshot at purchase time
+  unit_price_cents: number; // snapshot at purchase time
+  quantity: number;
+  line_total_cents: number;
+}
+
+export interface Order {
+  id: number;
+  checkout_id: string;
+  buyer_id: number;
+  seller_id: number;
+  store_name: string;
+  status: OrderStatus;
+  total_cents: number;
+  items: OrderItem[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CheckoutResult {
+  checkout_id: string;
+  orders: Order[];
+}
