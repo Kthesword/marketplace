@@ -12,6 +12,7 @@ import (
 	"github.com/kthesword/marketplace/backend/internal/config"
 	"github.com/kthesword/marketplace/backend/internal/httpx"
 	"github.com/kthesword/marketplace/backend/internal/middleware"
+	"github.com/kthesword/marketplace/backend/internal/order"
 	"github.com/kthesword/marketplace/backend/internal/product"
 	"github.com/kthesword/marketplace/backend/internal/store"
 	"github.com/kthesword/marketplace/backend/internal/user"
@@ -31,6 +32,8 @@ func newRouter(cfg config.Config, pool *pgxpool.Pool) http.Handler {
 	storeHandler := store.NewHandler(storeRepo)
 	productHandler := product.NewHandler(productRepo, storeRepo)
 	cartHandler := cart.NewHandler(cartRepo)
+	orderRepo := order.NewRepo(pool)
+	orderHandler := order.NewHandler(orderRepo, order.NewService(pool))
 
 	// Health
 	mux.HandleFunc("GET /api/health", healthHandler(pool))
@@ -68,6 +71,11 @@ func newRouter(cfg config.Config, pool *pgxpool.Pool) http.Handler {
 	mux.HandleFunc("POST /api/cart/items", middleware.RequireRole(tokenMgr, user.RoleBuyer, cartHandler.Add))
 	mux.HandleFunc("PATCH /api/cart/items/{productId}", middleware.RequireRole(tokenMgr, user.RoleBuyer, cartHandler.UpdateQuantity))
 	mux.HandleFunc("DELETE /api/cart/items/{productId}", middleware.RequireRole(tokenMgr, user.RoleBuyer, cartHandler.Remove))
+
+	// Buyer orders (buyer role required)
+	mux.HandleFunc("POST /api/orders/checkout", middleware.RequireRole(tokenMgr, user.RoleBuyer, orderHandler.Checkout))
+	mux.HandleFunc("GET /api/orders", middleware.RequireRole(tokenMgr, user.RoleBuyer, orderHandler.List))
+	mux.HandleFunc("GET /api/orders/{id}", middleware.RequireRole(tokenMgr, user.RoleBuyer, orderHandler.Get))
 
 	// Catch-all: any unmatched path gets our JSON error format, not Go's plain text.
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
