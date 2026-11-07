@@ -4,6 +4,7 @@ import type {
   CheckoutResult,
   LoginInput,
   Order,
+  OrderStatus,
   Paginated,
   Product,
   ProductInput,
@@ -132,6 +133,29 @@ export const api = {
         method: "DELETE",
       });
     },
+    listOrders(params?: {
+      status?: OrderStatus;
+      page?: number;
+      pageSize?: number;
+    }): Promise<Paginated<Order>> {
+      const sp = new URLSearchParams();
+      if (params?.status) sp.set("status", params.status);
+      if (params?.page) sp.set("page", String(params.page));
+      if (params?.pageSize) sp.set("page_size", String(params.pageSize));
+      const qs = sp.toString();
+      return request<Paginated<Order>>(
+        `/bff/api/seller/orders${qs ? `?${qs}` : ""}`
+      );
+    },
+    updateOrderStatus(
+      id: number,
+      status: OrderStatus
+    ): Promise<{ order: Order }> {
+      return request<{ order: Order }>(`/bff/api/seller/orders/${id}/status`, {
+        method: "PATCH",
+        body: JSON.stringify({ status }),
+      });
+    },
   },
 
   catalog: {
@@ -205,6 +229,12 @@ export const api = {
     },
     get(id: number): Promise<{ order: Order }> {
       return request<{ order: Order }>(`/bff/api/orders/${id}`);
+    },
+    cancel(id: number): Promise<{ order: Order }> {
+      return request<{ order: Order }>(`/bff/api/orders/${id}/cancel`, {
+        method: "POST",
+        body: "{}",
+      });
     },
   },
 };

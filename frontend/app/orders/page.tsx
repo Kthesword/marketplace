@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { api } from "@/lib/api";
+import { api, ApiClientError } from "@/lib/api";
 import { formatCents } from "@/lib/money";
 import type { Order, Paginated } from "@/lib/types";
 import { EmptyState, ErrorState, LoadingState } from "@/components/states";
@@ -14,6 +14,8 @@ export default function OrdersPage() {
   const [data, setData] = useState<Paginated<Order> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [cancellingId, setCancellingId] = useState<number | null>(null);
+  const [actionError, setActionError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -31,6 +33,29 @@ export default function OrdersPage() {
     void load();
   }, [load]);
 
+  async function handleCancel(orderId: number) {
+    setCancellingId(orderId);
+    setActionError(null);
+    try {
+      const res = await api.orders.cancel(orderId);
+      setData((prev) =>
+        prev
+          ? {
+              ...prev,
+              items: prev.items.map((o) => (o.id === orderId ? res.order : o)),
+            }
+          : prev
+      );
+    } catch (err) {
+      setActionError(
+        err instanceof ApiClientError ? err.message : "Failed to cancel order"
+      );
+      await load();
+    } finally {
+      setCancellingId(null);
+    }
+  }
+
   // Count orders per checkout_id so we can label purchases that were split by seller.
   const perCheckout = new Map<string, number>();
   for (const o of data?.items ?? []) {
@@ -43,6 +68,15 @@ export default function OrdersPage() {
       <p className="mt-1 text-sm text-gray-600">
         Track the status of everything you have purchased.
       </p>
+
+      {actionError && (
+        <div
+          role="alert"
+          className="mt-4 rounded-lg border border-red-300 bg-red-50 p-3 text-sm text-red-800"
+        >
+          {actionError}
+        </div>
+      )}
 
       <div className="mt-6">
         {loading ? (
@@ -90,15 +124,27 @@ export default function OrdersPage() {
                           " · part of a multi-seller purchase"}
                       </p>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3">
                       <StatusBadge status={o.status} />
+                      {o.status === "Pending" && (
+                        <button
+                          type="button"
+                          disabled={cancellingId === o.id}
+                          onClick={() => handleCancel(o.id)}
+                          className="rounded-md border border-red-300 bg-red-50 px-2.5 py-1 text-xs font-semibold text-red-700 hover:bg-red-100 disabled:opacity-50"
+                        >
+                          {cancellingId === o.id ? "Cancelling..." : "Cancel"}
+                        </button>
+                      )}
                       <span className="font-bold text-gray-900">
                         {formatCents(o.total_cents)}
                       </span>
                     </div>
                   </div>
                   <p className="mt-3 line-clamp-1 text-sm text-gray-600">
-                    {o.items.map((i) => `${i.product_name} × ${i.quantity}`).join(", ")}
+                    {o.items
+                      .map((i) => `${i.product_name} × ${i.quantity}`)
+                      .join(", ")}
                   </p>
                 </li>
               ))}
@@ -115,4 +161,3 @@ export default function OrdersPage() {
     </main>
   );
 }
-

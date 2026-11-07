@@ -117,6 +117,7 @@ export interface Order {
   id: number;
   checkout_id: string;
   buyer_id: number;
+  buyer_name?: string;
   seller_id: number;
   store_name: string;
   status: OrderStatus;
