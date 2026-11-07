@@ -16,7 +16,7 @@ func setupTestDB(t *testing.T) *pgxpool.Pool {
 
 	dbURL := os.Getenv("DATABASE_URL")
 	if dbURL == "" {
-		dbURL = "postgres://postgres:postgres@localhost:5433/marketplace?sslmode=disable"
+		dbURL = "postgres://marketplace:marketplace@localhost:5433/marketplace?sslmode=disable"
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
@@ -126,8 +126,12 @@ func TestCheckoutAndCancelIntegration(t *testing.T) {
 
 	// Verify stock was decremented in database
 	var stock1, stock2 int
-	_ = pool.QueryRow(ctx, `SELECT stock FROM products WHERE id = $1`, prod1ID).Scan(&stock1)
-	_ = pool.QueryRow(ctx, `SELECT stock FROM products WHERE id = $2`, prod2ID).Scan(&stock2)
+	if err := pool.QueryRow(ctx, `SELECT stock FROM products WHERE id = $1`, prod1ID).Scan(&stock1); err != nil {
+		t.Fatalf("query product 1 stock: %v", err)
+	}
+	if err := pool.QueryRow(ctx, `SELECT stock FROM products WHERE id = $1`, prod2ID).Scan(&stock2); err != nil {
+		t.Fatalf("query product 2 stock: %v", err)
+	}
 	if stock1 != 8 {
 		t.Errorf("product 1 stock = %d; want 8 (10 - 2)", stock1)
 	}
