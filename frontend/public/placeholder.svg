@@ -1,0 +1,45 @@
+<svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0" y1="0" x2="600" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F1F5F9" />
+      <stop offset="100%" stop-color="#E2E8F0" />
+    </linearGradient>
+    <linearGradient id="iconGradient" x1="240" y1="210" x2="360" y2="350" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366F1" />
+      <stop offset="100%" stop-color="#4F46E5" />
+    </linearGradient>
+    <linearGradient id="boxGradient" x1="200" y1="200" x2="400" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#CBD5E1" />
+      <stop offset="100%" stop-color="#94A3B8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="600" fill="url(#bgGradient)" />
+
+  <!-- Subtle Decorative Circles -->
+  <circle cx="300" cy="270" r="140" fill="#E0E7FF" fill-opacity="0.4" />
+  <circle cx="300" cy="270" r="100" fill="#EEF2FF" fill-opacity="0.6" />
+
+  <!-- Package / Product Icon -->
+  <g transform="translate(230, 200)">
+    <!-- Package Base -->
+    <path d="M70 15L130 50L70 85L10 50L70 15Z" fill="url(#iconGradient)" />
+    <path d="M10 50L70 85V155L10 120V50Z" fill="#4338CA" fill-opacity="0.9" />
+    <path d="M70 85L130 50V120L70 155V85Z" fill="#4F46E5" />
+    
+    <!-- Top tape / ribbon -->
+    <path d="M50 26L110 61L90 73L30 38L50 26Z" fill="#A5B4FC" fill-opacity="0.6" />
+  </g>
+
+  <!-- Text Badge -->
+  <rect x="200" y="400" width="200" height="34" rx="17" fill="#FFFFFF" fill-opacity="0.9" />
+  <text x="300" y="422" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#475569" text-anchor="middle" letter-spacing="0.5">
+    MARKETPLACE
+  </text>
+
+  <!-- Secondary Label -->
+  <text x="300" y="460" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#64748B" text-anchor="middle">
+    No Image Available
+  </text>
+</svg>

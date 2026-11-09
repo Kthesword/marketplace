@@ -6,6 +6,7 @@ import { api } from "@/lib/api";
 import { formatCents } from "@/lib/money";
 import type { Cart, CartItem } from "@/lib/types";
 import { EmptyState, ErrorState, LoadingState } from "@/components/states";
+import { ProductImage } from "@/components/ProductImage";
 
 export default function CartPage() {
   const [cart, setCart] = useState<Cart | null>(null);
@@ -115,18 +116,11 @@ export default function CartPage() {
                   >
                     <div className="flex items-center gap-4">
                       <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-gray-100">
-                        {item.image_url ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
-                            src={item.image_url}
-                            alt={item.name}
-                            className="h-full w-full object-cover"
-                          />
-                        ) : (
-                          <div className="flex h-full w-full items-center justify-center text-xs font-semibold text-gray-600">
-                            No img
-                          </div>
-                        )}
+                        <ProductImage
+                          src={item.image_url}
+                          alt={item.name}
+                          className="h-full w-full object-cover"
+                        />
                       </div>
                       <div>
                         <Link

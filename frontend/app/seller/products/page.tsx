@@ -9,6 +9,7 @@ import { api, ApiClientError } from "@/lib/api";
 import { centsToDollars, dollarsToCents, formatCents } from "@/lib/money";
 import type { Product } from "@/lib/types";
 import { EmptyState, ErrorState, LoadingState } from "@/components/states";
+import { ProductImage } from "@/components/ProductImage";
 
 const emptyForm: ProductFormValues = {
   name: "",
@@ -371,12 +372,23 @@ export default function SellerProductsPage() {
                 {products.map((p) => (
                   <tr key={p.id}>
                     <td className="px-6 py-4">
-                      <div className="font-bold text-gray-900">{p.name}</div>
-                      {p.description && (
-                        <div className="line-clamp-1 text-xs font-medium text-gray-700">
-                          {p.description}
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 shrink-0 overflow-hidden rounded-md bg-gray-100">
+                          <ProductImage
+                            src={p.image_url}
+                            alt={p.name}
+                            className="h-full w-full object-cover"
+                          />
                         </div>
-                      )}
+                        <div>
+                          <div className="font-bold text-gray-900">{p.name}</div>
+                          {p.description && (
+                            <div className="line-clamp-1 text-xs font-medium text-gray-700">
+                              {p.description}
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </td>
                     <td className="px-6 py-4 font-medium text-gray-900">
                       {formatCents(p.price_cents)}

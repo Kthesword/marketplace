@@ -8,6 +8,7 @@ import { useAuth } from "@/lib/auth-context";
 import { formatCents } from "@/lib/money";
 import type { Product } from "@/lib/types";
 import { ErrorState, LoadingState } from "@/components/states";
+import { ProductImage } from "@/components/ProductImage";
 
 export default function ProductDetailPage() {
   const params = useParams<{ id: string }>();
@@ -91,19 +92,12 @@ export default function ProductDetailPage() {
           />
         ) : (
           <div className="grid grid-cols-1 gap-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm md:grid-cols-2 md:p-8">
-            <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">
-              {product.image_url ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={product.image_url}
-                  alt={product.name}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center text-sm text-gray-400">
-                  No image available
-                </div>
-              )}
+            <div className="aspect-square overflow-hidden rounded-lg bg-slate-100">
+              <ProductImage
+                src={product.image_url}
+                alt={product.name}
+                className="h-full w-full object-cover"
+              />
             </div>
 
             <div className="flex flex-col justify-between">

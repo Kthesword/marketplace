@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Product } from "@/lib/types";
 import { formatCents } from "@/lib/money";
+import { ProductImage } from "@/components/ProductImage";
 
 export function ProductCard({ product }: { product: Product }) {
   const outOfStock = product.stock === 0;
@@ -9,20 +10,13 @@ export function ProductCard({ product }: { product: Product }) {
     <div className="group flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
       <Link
         href={`/products/${product.id}`}
-        className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100"
+        className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100"
       >
-        {product.image_url ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={product.image_url}
-            alt={product.name}
-            className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-xs font-semibold text-gray-500">
-            No image
-          </div>
-        )}
+        <ProductImage
+          src={product.image_url}
+          alt={product.name}
+          className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+        />
         {outOfStock && (
           <span className="absolute right-2 top-2 rounded-full bg-red-600 px-2.5 py-0.5 text-xs font-bold text-white shadow">
             Out of stock
